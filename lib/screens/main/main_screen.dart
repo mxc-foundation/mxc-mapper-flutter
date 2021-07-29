@@ -1,6 +1,6 @@
-import 'package:admin/controllers/MenuController.dart';
-import 'package:admin/responsive.dart';
-import 'package:admin/screens/dashboard/dashboard_screen.dart';
+import 'package:mxc_controller/controllers/MenuController.dart';
+import 'package:mxc_controller/responsive.dart';
+import 'package:mxc_controller/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +11,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: context.read<MenuController>().scaffoldKey,
-      drawer: Responsive.isDesktop(context) ? null:SideMenu(),
+      drawer: Responsive.isDesktop(context) ? null : SideMenu(),
       body: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

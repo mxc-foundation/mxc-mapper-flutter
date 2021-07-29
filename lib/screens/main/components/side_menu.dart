@@ -20,40 +20,45 @@ class SideMenu extends StatelessWidget {
             press: () {},
           ),
           DrawerListTile(
-            title: "Transaction",
-            svgSrc: "assets/icons/menu_tran.svg",
+            title: "LPWAN MANAGEMENT",
+            svgSrc: "assets/icons/dummy.svg",
             press: () {},
           ),
           DrawerListTile(
-            title: "Task",
-            svgSrc: "assets/icons/menu_task.svg",
+            title: "Network Server",
+            svgSrc: "assets/icons/menu_networkserver.svg",
             press: () {},
           ),
           DrawerListTile(
-            title: "Documents",
-            svgSrc: "assets/icons/menu_doc.svg",
+            title: "Gateway",
+            svgSrc: "assets/icons/menu_gateway.svg",
             press: () {},
           ),
           DrawerListTile(
-            title: "Store",
-            svgSrc: "assets/icons/menu_store.svg",
+            title: "Device",
+            svgSrc: "assets/icons/menu_device.svg",
             press: () {},
           ),
           DrawerListTile(
-            title: "Notification",
-            svgSrc: "assets/icons/menu_notification.svg",
+            title: "Organization",
+            svgSrc: "assets/icons/menu_organization.svg",
             press: () {},
           ),
           DrawerListTile(
             title: "Profile",
-            svgSrc: "assets/icons/menu_profile.svg",
+            svgSrc: "assets/icons/menu_profiles.svg",
             press: () {},
           ),
           DrawerListTile(
+            title: "Setting",
+            svgSrc: "assets/icons/menu_settings.svg",
+            press: () {},
+          ),
+          /* DrawerListTile(
             title: "Settings",
             svgSrc: "assets/icons/menu_setting.svg",
             press: () {},
-          ),
+          ), */
         ],
       ),
     );

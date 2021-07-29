@@ -1,5 +1,5 @@
-import 'package:admin/controllers/MenuController.dart';
-import 'package:admin/responsive.dart';
+import 'package:mxc_controller/controllers/MenuController.dart';
+import 'package:mxc_controller/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +22,7 @@ class Header extends StatelessWidget {
           ),
         if (!Responsive.isMobile(context))
           Text(
-            "Dashboard",
+            "Supernode Management",
             style: Theme.of(context).textTheme.headline6,
           ),
         if (!Responsive.isMobile(context))
@@ -62,7 +62,7 @@ class ProfileCard extends StatelessWidget {
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-              child: Text("Angelina Joli"),
+              child: Text("admin"),
             ),
           Icon(Icons.keyboard_arrow_down),
         ],

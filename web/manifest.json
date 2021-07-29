@@ -1,11 +1,11 @@
 {
-    "name": "admin",
-    "short_name": "admin",
+    "name": "mxc-controller",
+    "short_name": "mxc-controller_short",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "mxc-controller_des",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

@@ -1,6 +1,6 @@
-import 'package:admin/constants.dart';
-import 'package:admin/controllers/MenuController.dart';
-import 'package:admin/screens/main/main_screen.dart';
+import 'package:mxc_controller/constants.dart';
+import 'package:mxc_controller/controllers/MenuController.dart';
+import 'package:mxc_controller/screens/main/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Admin Panel',
+      title: 'MXC Controller',
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: bgColor,
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
