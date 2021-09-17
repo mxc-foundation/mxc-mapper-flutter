@@ -1,4 +1,4 @@
-# Responsive mxc controller Dashboard - Flutter UI
+# Responsive mxc mapper Flutter UI
 
 
 **Packages we are using:**

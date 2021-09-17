@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mxc_mapper/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SideMenu extends StatelessWidget {
@@ -12,53 +13,42 @@ class SideMenu extends StatelessWidget {
       child: ListView(
         children: [
           DrawerHeader(
-            child: Image.asset("assets/images/logo.png"),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Text("Welcom to the MXC Mapper")],
+                ),
+              ],
+            ),
           ),
-          DrawerListTile(
-            title: "Dashbord",
-            svgSrc: "assets/icons/menu_dashbord.svg",
-            press: () {},
+          DrawerHeader(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "1335345",
+                      style: TextStyle(
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 48),
+                    ),
+                    SizedBox(height: defaultPadding),
+                    Text(
+                      "M2 pro miners",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-          DrawerListTile(
-            title: "LPWAN MANAGEMENT",
-            svgSrc: "assets/icons/dummy.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Network Server",
-            svgSrc: "assets/icons/menu_networkserver.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Gateway",
-            svgSrc: "assets/icons/menu_gateway.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Device",
-            svgSrc: "assets/icons/menu_device.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Organization",
-            svgSrc: "assets/icons/menu_organization.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Profile",
-            svgSrc: "assets/icons/menu_profiles.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Setting",
-            svgSrc: "assets/icons/menu_settings.svg",
-            press: () {},
-          ),
-          /* DrawerListTile(
-            title: "Settings",
-            svgSrc: "assets/icons/menu_setting.svg",
-            press: () {},
-          ), */
         ],
       ),
     );

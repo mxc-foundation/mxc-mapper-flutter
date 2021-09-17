@@ -1,11 +1,11 @@
 {
-    "name": "mxc-controller",
-    "short_name": "mxc-controller_short",
+    "name": "mxc-mapper",
+    "short_name": "mxc-mapper",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "mxc-controller_des",
+    "description": "visualized devices locations",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

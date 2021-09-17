@@ -1,5 +1,5 @@
-name: mxc_controller
-description: mxc_controller
+name: mxc_mapper
+description: mxc_mapper
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.

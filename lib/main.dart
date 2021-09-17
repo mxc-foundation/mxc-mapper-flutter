@@ -1,6 +1,6 @@
-import 'package:mxc_controller/constants.dart';
-import 'package:mxc_controller/controllers/MenuController.dart';
-import 'package:mxc_controller/screens/main/main_screen.dart';
+import 'package:mxc_mapper/constants.dart';
+import 'package:mxc_mapper/controllers/MenuController.dart';
+import 'package:mxc_mapper/screens/main/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'MXC Controller',
+      title: 'MXC Mapper',
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: bgColor,
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)

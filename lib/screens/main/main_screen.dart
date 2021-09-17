@@ -1,6 +1,6 @@
-import 'package:mxc_controller/controllers/MenuController.dart';
-import 'package:mxc_controller/responsive.dart';
-import 'package:mxc_controller/screens/dashboard/dashboard_screen.dart';
+import 'package:mxc_mapper/controllers/MenuController.dart';
+import 'package:mxc_mapper/responsive.dart';
+import 'package:mxc_mapper/screens/map/map_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,17 +16,13 @@ class MainScreen extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // We want this side menu only for large screen
             if (Responsive.isDesktop(context))
               Expanded(
-                // default flex = 1
-                // and it takes 1/6 part of the screen
-                child: SideMenu(),
+                flex: 5,
+                child: MapScreen(),
               ),
             Expanded(
-              // It takes 5/6 part of the screen
-              flex: 5,
-              child: DashboardScreen(),
+              child: SideMenu(),
             ),
           ],
         ),
