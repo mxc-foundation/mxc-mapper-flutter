@@ -9,24 +9,46 @@ import 'components/side_menu.dart';
 class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: context.read<MenuController>().scaffoldKey,
-      drawer: Responsive.isDesktop(context) ? null : SideMenu(),
-      body: SafeArea(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (Responsive.isDesktop(context))
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (Responsive.isDesktop(context))
+          Expanded(
+            flex: 5,
+            child: MapScreen(),
+          ),
+        Expanded(
+          child: SideMenu(),
+        ),
+      ],
+    );
+  }
+}
+
+
+/* class MainScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Scaffold(
+        key: context.read<MenuController>().scaffoldKey,
+        drawer: Responsive.isDesktop(context) ? null : SideMenu(),
+        body: SafeArea(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (Responsive.isDesktop(context))
+                Expanded(
+                  flex: 5,
+                  child: MapScreen(),
+                ),
               Expanded(
-                flex: 5,
-                child: MapScreen(),
+                child: SideMenu(),
               ),
-            Expanded(
-              child: SideMenu(),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
-}
+} */
