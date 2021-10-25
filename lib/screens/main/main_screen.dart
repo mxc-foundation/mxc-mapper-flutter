@@ -2,7 +2,7 @@ import 'package:mxc_mapper/controllers/MenuController.dart';
 import 'package:mxc_mapper/responsive.dart';
 import 'package:mxc_mapper/screens/map/map_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
 import 'components/side_menu.dart';
 
