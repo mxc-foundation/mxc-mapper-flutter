@@ -8,13 +8,28 @@ import 'package:mxc_mapper/screens/main/main_screen.dart';
 void main() {
   // riverpod
   runApp(ProviderScope(
-    child: MyApp(),
+    child: MXCMapperApp(),
   ));
 }
 
 final menuProvider = ChangeNotifierProvider((ref) => MenuController());
+final greetingProvider = Provider((ref) {
+  return 'Hi';
+});
 
-class MyApp extends StatelessWidget {
+class IncrementNotifier extends ChangeNotifier {
+  int _value = 0;
+  int get value => _value;
+
+  void increment() {
+    _value++;
+    notifyListeners();
+  }
+}
+
+final incrementProvider = ChangeNotifierProvider((ref) => IncrementNotifier());
+
+class MXCMapperApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
