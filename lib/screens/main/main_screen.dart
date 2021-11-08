@@ -27,31 +27,3 @@ class MainScreen extends StatelessWidget {
     );
   }
 }
-
-
-/* class MainScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        key: context.read<MenuController>().scaffoldKey,
-        drawer: Responsive.isDesktop(context) ? null : SideMenu(),
-        body: SafeArea(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (Responsive.isDesktop(context))
-                Expanded(
-                  flex: 5,
-                  child: MapScreen(),
-                ),
-              Expanded(
-                child: SideMenu(),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-} */

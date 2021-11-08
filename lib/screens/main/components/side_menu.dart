@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_textfield_autocomplete/flutter_textfield_autocomplete.dart';
 import 'package:mxc_mapper/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 class FakeHttpClient {
   Future<String> get(int url) async {
@@ -30,6 +32,75 @@ class _SideMenuState extends State<SideMenu> {
   bool _checkboxListTileAll = false;
   bool _checkboxListTileOnline = false;
   bool _checkboxListTileOffline = false;
+
+  ScrollController _controller = ScrollController();
+
+  static const historyLength = 5;
+
+  List<String> _searchHistory = [
+    'ddd2',
+    'ddd3',
+    'ddd4',
+    'ddd5',
+  ];
+
+  GlobalKey<TextFieldAutoCompleteState<String>> _textFieldAutoCompleteKey =
+      new GlobalKey();
+
+  List<String> filteredSearchHistory = [];
+
+  String selectedTerm = '';
+
+  List<String> filterSearchTerms({
+    String filter = '',
+  }) {
+    if (filter != null && filter.isNotEmpty) {
+      return _searchHistory.reversed
+          .where((term) => term.startsWith(filter))
+          .toList();
+    } else {
+      return _searchHistory.reversed.toList();
+    }
+  }
+
+  void addSearchTerm(String term) {
+    if (_searchHistory.contains(term)) {
+      putSearchTermFirst(term);
+      return;
+    }
+
+    _searchHistory.add(term);
+    if (_searchHistory.length > historyLength) {
+      _searchHistory.removeRange(0, _searchHistory.length - historyLength);
+    }
+
+    filteredSearchHistory = filterSearchTerms(filter: '');
+  }
+
+  void deleteSearchTerm(String term) {
+    _searchHistory.removeWhere((t) => t == term);
+    filteredSearchHistory = filterSearchTerms(filter: '');
+  }
+
+  void putSearchTermFirst(String term) {
+    deleteSearchTerm(term);
+    addSearchTerm(term);
+  }
+
+  late FloatingSearchBarController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = FloatingSearchBarController();
+    filteredSearchHistory = filterSearchTerms(filter: '');
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +135,131 @@ class _SideMenuState extends State<SideMenu> {
               );
             }).toList(),
             onChanged: (_) {},
+          ),
+          Container(
+            height: 100,
+            child: FloatingSearchBar(
+              controller: controller,
+              body: FloatingSearchBarScrollNotifier(
+                child: SizedBox(height: 0),
+                /* child: SearchResultsListView(
+                  searchTerm: selectedTerm,
+                ), */
+              ),
+              // transition: CircularFloatingSearchBarTransition(),
+              physics: BouncingScrollPhysics(),
+              title: Text(
+                selectedTerm ?? 'The Search App',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              hint: 'Search and find out...',
+              automaticallyImplyDrawerHamburger: false,
+              backgroundColor: Color.fromRGBO(42, 45, 62, 1),
+              accentColor: Color.fromRGBO(42, 45, 62, 1),
+              shadowColor: Color.fromRGBO(42, 45, 62, 0),
+              backdropColor: Color.fromRGBO(42, 45, 62, 0),
+              actions: [
+                FloatingSearchBarAction.searchToClear(),
+              ],
+              onQueryChanged: (query) {
+                print("query : $query");
+                setState(() {
+                  filteredSearchHistory = filterSearchTerms(filter: query);
+                });
+
+                print("filteredSearchHistory : ${filteredSearchHistory.first}");
+              },
+              onSubmitted: (query) {
+                setState(() {
+                  addSearchTerm(query);
+                  selectedTerm = query;
+                });
+                controller.close();
+              },
+              builder: (context, transition) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Material(
+                    color: Colors.white,
+                    elevation: 4,
+                    child: Builder(
+                      builder: (context) {
+                        print(
+                            "filteredSearchHistory in builder : $filteredSearchHistory");
+                        if (filteredSearchHistory.isEmpty &&
+                            controller.query.isEmpty) {
+                          return Container(
+                            height: 0,
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Start searching',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context).textTheme.caption,
+                            ),
+                          );
+                        } else if (filteredSearchHistory.isEmpty) {
+                          return ListTile(
+                            title: Text(controller.query),
+                            leading: const Icon(Icons.search),
+                            onTap: () {
+                              setState(() {
+                                addSearchTerm(controller.query);
+                                selectedTerm = controller.query;
+                              });
+                              controller.close();
+                            },
+                          );
+                        } else {
+                          // return ListView.builder(
+                          //     shrinkWrap: true,
+                          //     controller: _controller,
+                          //     itemCount: filteredSearchHistory.length,
+                          //     itemBuilder: (context, index) {
+                          //       print(
+                          //           "In listview builder : $filteredSearchHistory");
+                          //       return Text("${filteredSearchHistory[index]}",
+                          //           style: TextStyle(color: Colors.red));
+                          //     });
+                          return Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: filteredSearchHistory
+                                .map(
+                                  (term) => ListTile(
+                                    title: Text(
+                                      term,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(color: Colors.black87),
+                                    ),
+                                    leading: const Icon(Icons.history),
+                                    trailing: IconButton(
+                                      icon: const Icon(Icons.clear),
+                                      onPressed: () {
+                                        setState(() {
+                                          deleteSearchTerm(term);
+                                        });
+                                      },
+                                    ),
+                                    onTap: () {
+                                      setState(() {
+                                        putSearchTermFirst(term);
+                                        selectedTerm = term;
+                                      });
+                                      controller.close();
+                                    },
+                                  ),
+                                )
+                                .toList(),
+                          );
+                        }
+                      },
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
           DrawerHeader(
             child: Row(
@@ -153,7 +349,6 @@ class _SideMenuState extends State<SideMenu> {
 class DrawerListTile extends StatelessWidget {
   const DrawerListTile({
     Key? key,
-    // For selecting those three line once press "Command+D"
     required this.title,
     required this.svgSrc,
     required this.press,
@@ -174,6 +369,49 @@ class DrawerListTile extends StatelessWidget {
       title: Text(
         title,
         style: TextStyle(color: Colors.white54),
+      ),
+    );
+  }
+}
+
+class SearchResultsListView extends StatelessWidget {
+  final String searchTerm;
+
+  const SearchResultsListView({
+    Key? key,
+    this.searchTerm = '',
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (searchTerm == '') {
+      return Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.search,
+              size: 64,
+            ),
+            Text(
+              'Start searching',
+              style: Theme.of(context).textTheme.headline5,
+            )
+          ],
+        ),
+      );
+    }
+
+    // final fsb = FloatingSearchBar.of(context);
+
+    return ListView(
+      padding: EdgeInsets.only(top: 20),
+      children: List.generate(
+        50,
+        (index) => ListTile(
+          title: Text('$searchTerm search result'),
+          subtitle: Text(index.toString()),
+        ),
       ),
     );
   }
