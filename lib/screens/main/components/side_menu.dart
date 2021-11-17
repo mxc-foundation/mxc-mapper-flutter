@@ -4,6 +4,7 @@ import 'package:mxc_mapper/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'dart:math' as math;
 
 class FakeHttpClient {
   Future<String> get(int url) async {
@@ -43,6 +44,17 @@ class _SideMenuState extends State<SideMenu> {
     'ddd4',
     'ddd5',
   ];
+
+  List<String> _animals = [
+    "Matchx",
+    "Huawei Tech",
+    "Enlink",
+    "XY Pool",
+    'sejong solutech',
+    'DU Iot'
+  ];
+
+  String? _selectedColor;
 
   GlobalKey<TextFieldAutoCompleteState<String>> _textFieldAutoCompleteKey =
       new GlobalKey();
@@ -121,20 +133,61 @@ class _SideMenuState extends State<SideMenu> {
             ),
           ),
           DropdownButton<String>(
-            items: <String>[
-              'Matchx',
-              'Huawei Tech',
-              'Enlink',
-              'XY Pool',
-              'sejong solutech',
-              'DU Iot'
-            ].map((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            onChanged: (_) {},
+            onChanged: (value) {
+              setState(() {
+                _selectedColor = value;
+              });
+            },
+            value: _selectedColor,
+
+            // Hide the default underline
+            underline: Container(),
+            hint: Center(
+                child: Text(
+              'LPWAN Server',
+              style: TextStyle(color: Colors.white),
+            )),
+
+            icon: Transform.rotate(
+              angle: 270 * math.pi / 180,
+              child: IconButton(
+                icon: Icon(
+                  Icons
+                      .chevron_left, //  arrow_downward,  import  from '@mui/icons-material/KeyboardArrowDown';
+                  color: Colors.white,
+                ),
+                onPressed: null,
+              ),
+            ),
+            isExpanded: true,
+
+            // The list of options
+            items: _animals
+                .map((e) => DropdownMenuItem(
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          e,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      value: e,
+                    ))
+                .toList(),
+
+            // Customize the selected item
+            selectedItemBuilder: (BuildContext context) => _animals
+                .map((e) => Center(
+                      child: Text(
+                        e,
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.amber,
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ))
+                .toList(),
           ),
           Container(
             height: 100,
