@@ -66,7 +66,7 @@ class _SideMenuState extends State<SideMenu> {
   List<String> filterSearchTerms({
     String filter = '',
   }) {
-    if (filter != null && filter.isNotEmpty) {
+    if (filter != '' && filter.isNotEmpty) {
       return _searchHistory.reversed
           .where((term) => term.startsWith(filter))
           .toList();
@@ -202,7 +202,7 @@ class _SideMenuState extends State<SideMenu> {
               // transition: CircularFloatingSearchBarTransition(),
               physics: BouncingScrollPhysics(),
               title: Text(
-                selectedTerm ?? 'The Search App',
+                selectedTerm,
                 style: Theme.of(context).textTheme.headline6,
               ),
               hint: 'Search and find out...',
@@ -215,12 +215,12 @@ class _SideMenuState extends State<SideMenu> {
                 FloatingSearchBarAction.searchToClear(),
               ],
               onQueryChanged: (query) {
-                print("query : $query");
+                // print("query : $query");
                 setState(() {
                   filteredSearchHistory = filterSearchTerms(filter: query);
                 });
 
-                print("filteredSearchHistory : ${filteredSearchHistory.first}");
+                // print("filteredSearchHistory : ${filteredSearchHistory.first}");
               },
               onSubmitted: (query) {
                 setState(() {
