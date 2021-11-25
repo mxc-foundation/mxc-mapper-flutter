@@ -7,18 +7,21 @@ import 'components/side_menu.dart';
 class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (Responsive.isDesktop(context))
+    return Scaffold(
+      drawer: SideMenu(),
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (Responsive.isDesktop(context))
+            Expanded(
+              flex: 5,
+              child: MapScreen(),
+            ),
           Expanded(
-            flex: 5,
-            child: MapScreen(),
+            child: SideMenu(),
           ),
-        Expanded(
-          child: SideMenu(),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
